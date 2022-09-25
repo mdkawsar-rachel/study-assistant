@@ -35,7 +35,7 @@ running = False
 cache = None
 qcache = None
 chat_log = None
-botname = 'Makise Kurisu'
+botname = 'Study Assistant'
 username = 'Your name here'
 # Max chat log length (A token is about 4 letters and max tokens is 2048)
 max = int(3000)
@@ -66,8 +66,8 @@ def start(bot, update):
         chat_log = None
         cache = None
         qcache = None
-        botname = 'Makise Kurisu'
-        username = 'thewickedkarma'
+        botname = 'Study Assistant'
+        username = 'mkasajim'
         update.message.reply_text('Hi')
         return 
     else:
@@ -93,16 +93,16 @@ def reset(bot, update):
         chat_log = None
         cache = None
         qcache = None
-        botname = 'Makise Kurisu'
-        username = 'thewickedkarma'
+        botname = 'AI Study Assistant'
+        username = 'mkasajim'
         update.message.reply_text('Bot has been reset, send a message!')
         return
     if tim == 1:
         chat_log = None
         cache = None
         qcache = None
-        botname = 'Makise Kurisu'
-        username = 'thewickedkarma'
+        botname = 'AI Study Assistant'
+        username = 'mkasajim'
         update.message.reply_text('Bot has been reset, send a message!')
         return 
     else:
@@ -128,8 +128,8 @@ def retry(bot, update):
         chat_log = None
         cache = None
         qcache = None
-        botname = 'Makise Kurisu'
-        username = 'thewickedkarma'
+        botname = 'AI Study Assistant'
+        username = 'mkasajim'
         update.message.reply_text('Send a message!')
         return 
     else:
@@ -189,8 +189,8 @@ def wait(bot, update, botname, username, new):
                 cache = None
                 qcache = None
                 user = ""
-                username = 'kawsar'
-                botname = 'Karen'
+                username = 'mkasajim'
+                botname = 'AI Study Assistant'
                 update.message.reply_text('Timer has run down, bot has been reset to defaults.')
                 running = False
     else:
@@ -202,13 +202,13 @@ def wait(bot, update, botname, username, new):
 #Main functions#
 ################
 def limit(text, max):
-    ##if (len(text) >= max):
-    ##    inv = max * -1
-    ##    print("Reducing length of chat history... This can be a bit buggy.")
-    ##  nl = text[inv:]
-    ##  text = re.search(r'(?<=\n)[\s\S]*', nl).group(0)
-    ##    return text
-    ## else:
+    if (len(text) >= max):
+        inv = max * -1
+        print("Reducing length of chat history... This can be a bit buggy.")
+        nl = text[inv:]
+        text = re.search(r'(?<=\n)[\s\S]*', nl).group(0)
+        return text
+    else:
         return text
 
 
@@ -219,10 +219,21 @@ def ask(username, botname, question, chat_log=None):
     ampm = now.strftime("%I:%M %p")
     t = '[' + ampm + '] '
     prompt = f'{chat_log}{t}{username}: {question}\n{t}{botname}:'
-    response = completion.create(
-        prompt=prompt, engine="text-davinci-002", temperature=0.3,
-        top_p=1.0, frequency_penalty=0.0, presence_penalty=0.0, best_of=1,
-        max_tokens=250)
+   # response = completion.create(
+   #     prompt=prompt, engine="text-davinci-002", stop=['\n'], temperature=0.3,
+   #     top_p=1, frequency_penalty=0, presence_penalty=0, best_of=1,
+   #     max_tokens=250)
+   # answer = response.choices[0].text.strip()
+   # return answer
+    response = openai.Completion.create(
+        model="text-davinci-002",
+        prompt=prompt,
+        temperature=0.3,
+        max_tokens=512,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+        )
     answer = response.choices[0].text
     return answer
     # fp = 15 pp= 1 top_p = 1 temp = 0.9
