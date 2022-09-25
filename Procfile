@@ -1,1 +1,1 @@
-worker: python3 amadeus.py
+worker: python3 assistant.py
