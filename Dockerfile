@@ -10,12 +10,12 @@ RUN pip3 install -U pip
 
 RUN cd /
 
-RUN git clone https://github.com/mkasajim/sobjanta-telegram
+RUN git clone https://github.com/mdkawsar-rachel/study-assistant
 
-RUN cd sobjanta-telegram
+RUN cd study-assistant
 
-WORKDIR /sobjanta-telegram
+WORKDIR /study-assistant
 
 RUN pip3 install -U -r requirements.txt
 
-CMD python3 amadeus.py
+CMD python3 assistant.py
