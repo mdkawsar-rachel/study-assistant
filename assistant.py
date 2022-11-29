@@ -226,7 +226,7 @@ def ask(username, botname, question, chat_log=None):
    # answer = response.choices[0].text.strip()
    # return answer
     response = openai.Completion.create(
-        model="text-davinci-002",
+        model="text-davinci-003",
         prompt=prompt,
         temperature=0.3,
         max_tokens=512,
